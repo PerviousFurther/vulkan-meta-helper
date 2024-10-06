@@ -12849,8 +12849,6 @@ BEGIN_DECORATE_VK_STRUCT(VkDrawMeshTasksIndirectCommandEXT)
   DECORATE_VK_STRUCT_MEMBER(VkDrawMeshTasksIndirectCommandEXT, uint32_t, groupCountZ)
 END_DECORATE_VK_STRUCT(VkDrawMeshTasksIndirectCommandEXT);
 
-#endif //vulkan_core.h
-
 #if defined(VULKAN_WIN32_H_)
 
 DECORATE_VK_TYPE(VkWin32SurfaceCreateInfoKHR, VK_STRUCTURE_TYPE_WIN32_SURFACE_CREATE_INFO_KHR);
@@ -13632,3 +13630,4 @@ END_DECORATE_VK_STRUCT(VkXlibSurfaceCreateInfoKHR);
 
 #endif //vulkan_xlib_xrandr.h
 
+#endif //vulkan.h
