@@ -1,3 +1,4 @@
+
 #if !defined(VK_META_HELPER_H)
 #define VK_META_HELPER_H
 
