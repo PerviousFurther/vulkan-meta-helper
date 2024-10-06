@@ -29,13 +29,50 @@ Here is an simple sample:
 ...
 template<typename T>
 struct traits;
-#define DEFINE_VK_META__(sn, st)       \
-template <> struct traits<::sn>{       \
-  inline static constexpr c_str{#sn}   \
-  inline static constexpr value{::st}; \
+template<typename T>
+struct map;
+template<::VkStructureType v>
+struct type_constant;
+
+#define DECORATE_VK_TYPE(s, t)\
+template <> struct map<::s>{\
+  static constexpr auto value{::t};\
+};\
+template <> struct map<type_constant<::t>>{\
+  using type = s;\
+};
+#define BEGIN_DECORATE_VK_STRUCT(s) \
+template <> struct traits<::s>{\
+  static constexpr auto name{#s};
+
+#define DECORATE_VK_STRUCT_MEMBER(s, t, m)\
+  static constexpr auto name_##m{#m};\
+  static constexpr auto type_##m{#t};
+  
+#define DECORATE_VK_STRUCT_MEMBER_ARRAY(s, t, size, m)\
+  static constexpr auto name_##m{#m};\
+  static constexpr auto type_##m{#t "[" #size "]"};
+
+#define END_DECORATE_VK_STRUCT(s) }
+
+#define BEGIN_DECORATE_VK_ENUM(s) \
+inline constexpr auto make_##s(::std::string_view name__) {
+
+#define DECORATE_VK_ENUM(s, n, v)\
+  if(name__ == #n) return static_cast<::s>(v);
+
+#define END_DECORATE_VK_ENUM(s)\
+  return static_cast<::s>(0u);\
 }
+
 #include "vulkan_meta_helper.h"
+
 ...
+using type = typename map<type_constant<::VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_BUILD_GEOMETRY_INFO_KHR>>::type;
+constexpr auto name0{traits<type>::name}; // "(name of type)"
+constexpr auto name1{traits<type>::name_dstAccelerationStructure}; // "dstAccelerationStructure"
+constexpr auto type0{traits<type>::type_dstAccelerationStructure}; // "VkAccelerationStructureKHR"
+
 ```
 
 Then in following context. The library producer can 
