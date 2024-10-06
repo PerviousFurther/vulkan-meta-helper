@@ -1,4 +1,3 @@
-
 #if !defined(VK_META_HELPER_H)
 #define VK_META_HELPER_H
 
@@ -21,13 +20,10 @@
 #  define END_DECORATE_VK_ENUM(...)
 #endif
 #if !defined(DECORATE_VK_STRUCT_MEMBER_ARRAY)
-#  define DECORATE_VK_STRUCT_MEMBER_ARRAY(...)
+#  define DECORATE_VK_STRUCT_MEMBER_ARRAY(st, t, s, m) DECORATE_VK_STRUCT_MEMBER(st, t[s], m)
 #endif
 #if !defined(DECORATE_VK_ENUM_VALUE)
 #  define DECORATE_VK_ENUM_VALUE(...)
-#endif
-#if !defined(DECORATE_VK_ARRAY)
-#  define DECORATE_VK_ARRAY(type, size) type[size]
 #endif
 
 BEGIN_DECORATE_VK_ENUM(VkResult)
@@ -11922,6 +11918,7 @@ BEGIN_DECORATE_VK_ENUM(VkDirectDriverLoadingModeLUNARG)
   DECORATE_VK_ENUM_VALUE(VkDirectDriverLoadingModeLUNARG, VK_DIRECT_DRIVER_LOADING_MODE_MAX_ENUM_LUNARG, 0x7FFFFFFF)
 END_DECORATE_VK_ENUM(VkDirectDriverLoadingModeLUNARG);
 
+DECORATE_VK_TYPE(VkDirectDriverLoadingInfoLUNARG, VK_STRUCTURE_TYPE_DIRECT_DRIVER_LOADING_INFO_LUNARG);
 BEGIN_DECORATE_VK_STRUCT(VkDirectDriverLoadingInfoLUNARG)
   DECORATE_VK_STRUCT_MEMBER(VkDirectDriverLoadingInfoLUNARG, VkStructureType, sType)
   DECORATE_VK_STRUCT_MEMBER(VkDirectDriverLoadingInfoLUNARG, void*, pNext)
@@ -11929,6 +11926,7 @@ BEGIN_DECORATE_VK_STRUCT(VkDirectDriverLoadingInfoLUNARG)
   DECORATE_VK_STRUCT_MEMBER(VkDirectDriverLoadingInfoLUNARG, PFN_vkGetInstanceProcAddrLUNARG, pfnGetInstanceProcAddr)
 END_DECORATE_VK_STRUCT(VkDirectDriverLoadingInfoLUNARG);
 
+DECORATE_VK_TYPE(VkDirectDriverLoadingListLUNARG, VK_STRUCTURE_TYPE_DIRECT_DRIVER_LOADING_LIST_LUNARG);
 BEGIN_DECORATE_VK_STRUCT(VkDirectDriverLoadingListLUNARG)
   DECORATE_VK_STRUCT_MEMBER(VkDirectDriverLoadingListLUNARG, VkStructureType, sType)
   DECORATE_VK_STRUCT_MEMBER(VkDirectDriverLoadingListLUNARG, const void*, pNext)
@@ -12850,6 +12848,8 @@ BEGIN_DECORATE_VK_STRUCT(VkDrawMeshTasksIndirectCommandEXT)
   DECORATE_VK_STRUCT_MEMBER(VkDrawMeshTasksIndirectCommandEXT, uint32_t, groupCountZ)
 END_DECORATE_VK_STRUCT(VkDrawMeshTasksIndirectCommandEXT);
 
+
+
 #if defined(VULKAN_WIN32_H_)
 
 DECORATE_VK_TYPE(VkWin32SurfaceCreateInfoKHR, VK_STRUCTURE_TYPE_WIN32_SURFACE_CREATE_INFO_KHR);
@@ -13034,185 +13034,15 @@ END_DECORATE_VK_STRUCT(VkSurfaceFullScreenExclusiveWin32InfoEXT);
 
 #if defined(VULKAN_DIRECTFB_H_)
 
-DECORATE_VK_TYPE(VkWin32SurfaceCreateInfoKHR, VK_STRUCTURE_TYPE_WIN32_SURFACE_CREATE_INFO_KHR);
-BEGIN_DECORATE_VK_STRUCT(VkWin32SurfaceCreateInfoKHR)
-  DECORATE_VK_STRUCT_MEMBER(VkWin32SurfaceCreateInfoKHR, VkStructureType, sType)
-  DECORATE_VK_STRUCT_MEMBER(VkWin32SurfaceCreateInfoKHR, const void*, pNext)
-  DECORATE_VK_STRUCT_MEMBER(VkWin32SurfaceCreateInfoKHR, VkWin32SurfaceCreateFlagsKHR, flags)
-  DECORATE_VK_STRUCT_MEMBER(VkWin32SurfaceCreateInfoKHR, HINSTANCE, hinstance)
-  DECORATE_VK_STRUCT_MEMBER(VkWin32SurfaceCreateInfoKHR, HWND, hwnd)
-END_DECORATE_VK_STRUCT(VkWin32SurfaceCreateInfoKHR);
+BEGIN_DECORATE_VK_STRUCT(VkDirectFBSurfaceCreateInfoEXT)
+  DECORATE_VK_STRUCT_MEMBER(VkDirectFBSurfaceCreateInfoEXT, VkStructureType, sType)
+  DECORATE_VK_STRUCT_MEMBER(VkDirectFBSurfaceCreateInfoEXT, const void*, pNext)
+  DECORATE_VK_STRUCT_MEMBER(VkDirectFBSurfaceCreateInfoEXT, VkDirectFBSurfaceCreateFlagsEXT, flags)
+  DECORATE_VK_STRUCT_MEMBER(VkDirectFBSurfaceCreateInfoEXT, IDirectFB*, dfb)
+  DECORATE_VK_STRUCT_MEMBER(VkDirectFBSurfaceCreateInfoEXT, IDirectFBSurface*, surface)
+END_DECORATE_VK_STRUCT(VkDirectFBSurfaceCreateInfoEXT);
 
-DECORATE_VK_TYPE(VkImportMemoryWin32HandleInfoKHR, VK_STRUCTURE_TYPE_IMPORT_MEMORY_WIN32_HANDLE_INFO_KHR);
-BEGIN_DECORATE_VK_STRUCT(VkImportMemoryWin32HandleInfoKHR)
-  DECORATE_VK_STRUCT_MEMBER(VkImportMemoryWin32HandleInfoKHR, VkStructureType, sType)
-  DECORATE_VK_STRUCT_MEMBER(VkImportMemoryWin32HandleInfoKHR, const void*, pNext)
-  DECORATE_VK_STRUCT_MEMBER(VkImportMemoryWin32HandleInfoKHR, VkExternalMemoryHandleTypeFlagBits, handleType)
-  DECORATE_VK_STRUCT_MEMBER(VkImportMemoryWin32HandleInfoKHR, HANDLE, handle)
-  DECORATE_VK_STRUCT_MEMBER(VkImportMemoryWin32HandleInfoKHR, LPCWSTR, name)
-END_DECORATE_VK_STRUCT(VkImportMemoryWin32HandleInfoKHR);
-
-DECORATE_VK_TYPE(VkExportMemoryWin32HandleInfoKHR, VK_STRUCTURE_TYPE_EXPORT_MEMORY_WIN32_HANDLE_INFO_KHR);
-BEGIN_DECORATE_VK_STRUCT(VkExportMemoryWin32HandleInfoKHR)
-  DECORATE_VK_STRUCT_MEMBER(VkExportMemoryWin32HandleInfoKHR, VkStructureType, sType)
-  DECORATE_VK_STRUCT_MEMBER(VkExportMemoryWin32HandleInfoKHR, const void*, pNext)
-  DECORATE_VK_STRUCT_MEMBER(VkExportMemoryWin32HandleInfoKHR, const SECURITY_ATTRIBUTES*, pAttributes)
-  DECORATE_VK_STRUCT_MEMBER(VkExportMemoryWin32HandleInfoKHR, DWORD, dwAccess)
-  DECORATE_VK_STRUCT_MEMBER(VkExportMemoryWin32HandleInfoKHR, LPCWSTR, name)
-END_DECORATE_VK_STRUCT(VkExportMemoryWin32HandleInfoKHR);
-
-DECORATE_VK_TYPE(VkMemoryWin32HandlePropertiesKHR, VK_STRUCTURE_TYPE_MEMORY_WIN32_HANDLE_PROPERTIES_KHR);
-BEGIN_DECORATE_VK_STRUCT(VkMemoryWin32HandlePropertiesKHR)
-  DECORATE_VK_STRUCT_MEMBER(VkMemoryWin32HandlePropertiesKHR, VkStructureType, sType)
-  DECORATE_VK_STRUCT_MEMBER(VkMemoryWin32HandlePropertiesKHR, void*, pNext)
-  DECORATE_VK_STRUCT_MEMBER(VkMemoryWin32HandlePropertiesKHR, uint32_t, memoryTypeBits)
-END_DECORATE_VK_STRUCT(VkMemoryWin32HandlePropertiesKHR);
-
-DECORATE_VK_TYPE(VkMemoryGetWin32HandleInfoKHR, VK_STRUCTURE_TYPE_MEMORY_GET_WIN32_HANDLE_INFO_KHR);
-BEGIN_DECORATE_VK_STRUCT(VkMemoryGetWin32HandleInfoKHR)
-  DECORATE_VK_STRUCT_MEMBER(VkMemoryGetWin32HandleInfoKHR, VkStructureType, sType)
-  DECORATE_VK_STRUCT_MEMBER(VkMemoryGetWin32HandleInfoKHR, const void*, pNext)
-  DECORATE_VK_STRUCT_MEMBER(VkMemoryGetWin32HandleInfoKHR, VkDeviceMemory, memory)
-  DECORATE_VK_STRUCT_MEMBER(VkMemoryGetWin32HandleInfoKHR, VkExternalMemoryHandleTypeFlagBits, handleType)
-END_DECORATE_VK_STRUCT(VkMemoryGetWin32HandleInfoKHR);
-
-DECORATE_VK_TYPE(VkWin32KeyedMutexAcquireReleaseInfoKHR, VK_STRUCTURE_TYPE_WIN32_KEYED_MUTEX_ACQUIRE_RELEASE_INFO_KHR);
-BEGIN_DECORATE_VK_STRUCT(VkWin32KeyedMutexAcquireReleaseInfoKHR)
-  DECORATE_VK_STRUCT_MEMBER(VkWin32KeyedMutexAcquireReleaseInfoKHR, VkStructureType, sType)
-  DECORATE_VK_STRUCT_MEMBER(VkWin32KeyedMutexAcquireReleaseInfoKHR, const void*, pNext)
-  DECORATE_VK_STRUCT_MEMBER(VkWin32KeyedMutexAcquireReleaseInfoKHR, uint32_t, acquireCount)
-  DECORATE_VK_STRUCT_MEMBER(VkWin32KeyedMutexAcquireReleaseInfoKHR, const VkDeviceMemory*, pAcquireSyncs)
-  DECORATE_VK_STRUCT_MEMBER(VkWin32KeyedMutexAcquireReleaseInfoKHR, const uint64_t*, pAcquireKeys)
-  DECORATE_VK_STRUCT_MEMBER(VkWin32KeyedMutexAcquireReleaseInfoKHR, const uint32_t*, pAcquireTimeouts)
-  DECORATE_VK_STRUCT_MEMBER(VkWin32KeyedMutexAcquireReleaseInfoKHR, uint32_t, releaseCount)
-  DECORATE_VK_STRUCT_MEMBER(VkWin32KeyedMutexAcquireReleaseInfoKHR, const VkDeviceMemory*, pReleaseSyncs)
-  DECORATE_VK_STRUCT_MEMBER(VkWin32KeyedMutexAcquireReleaseInfoKHR, const uint64_t*, pReleaseKeys)
-END_DECORATE_VK_STRUCT(VkWin32KeyedMutexAcquireReleaseInfoKHR);
-
-DECORATE_VK_TYPE(VkImportSemaphoreWin32HandleInfoKHR, VK_STRUCTURE_TYPE_IMPORT_SEMAPHORE_WIN32_HANDLE_INFO_KHR);
-BEGIN_DECORATE_VK_STRUCT(VkImportSemaphoreWin32HandleInfoKHR)
-  DECORATE_VK_STRUCT_MEMBER(VkImportSemaphoreWin32HandleInfoKHR, VkStructureType, sType)
-  DECORATE_VK_STRUCT_MEMBER(VkImportSemaphoreWin32HandleInfoKHR, const void*, pNext)
-  DECORATE_VK_STRUCT_MEMBER(VkImportSemaphoreWin32HandleInfoKHR, VkSemaphore, semaphore)
-  DECORATE_VK_STRUCT_MEMBER(VkImportSemaphoreWin32HandleInfoKHR, VkSemaphoreImportFlags, flags)
-  DECORATE_VK_STRUCT_MEMBER(VkImportSemaphoreWin32HandleInfoKHR, VkExternalSemaphoreHandleTypeFlagBits, handleType)
-  DECORATE_VK_STRUCT_MEMBER(VkImportSemaphoreWin32HandleInfoKHR, HANDLE, handle)
-  DECORATE_VK_STRUCT_MEMBER(VkImportSemaphoreWin32HandleInfoKHR, LPCWSTR, name)
-END_DECORATE_VK_STRUCT(VkImportSemaphoreWin32HandleInfoKHR);
-
-DECORATE_VK_TYPE(VkExportSemaphoreWin32HandleInfoKHR, VK_STRUCTURE_TYPE_EXPORT_SEMAPHORE_WIN32_HANDLE_INFO_KHR);
-BEGIN_DECORATE_VK_STRUCT(VkExportSemaphoreWin32HandleInfoKHR)
-  DECORATE_VK_STRUCT_MEMBER(VkExportSemaphoreWin32HandleInfoKHR, VkStructureType, sType)
-  DECORATE_VK_STRUCT_MEMBER(VkExportSemaphoreWin32HandleInfoKHR, const void*, pNext)
-  DECORATE_VK_STRUCT_MEMBER(VkExportSemaphoreWin32HandleInfoKHR, const SECURITY_ATTRIBUTES*, pAttributes)
-  DECORATE_VK_STRUCT_MEMBER(VkExportSemaphoreWin32HandleInfoKHR, DWORD, dwAccess)
-  DECORATE_VK_STRUCT_MEMBER(VkExportSemaphoreWin32HandleInfoKHR, LPCWSTR, name)
-END_DECORATE_VK_STRUCT(VkExportSemaphoreWin32HandleInfoKHR);
-
-BEGIN_DECORATE_VK_STRUCT(VkD3D12FenceSubmitInfoKHR)
-  DECORATE_VK_STRUCT_MEMBER(VkD3D12FenceSubmitInfoKHR, VkStructureType, sType)
-  DECORATE_VK_STRUCT_MEMBER(VkD3D12FenceSubmitInfoKHR, const void*, pNext)
-  DECORATE_VK_STRUCT_MEMBER(VkD3D12FenceSubmitInfoKHR, uint32_t, waitSemaphoreValuesCount)
-  DECORATE_VK_STRUCT_MEMBER(VkD3D12FenceSubmitInfoKHR, const uint64_t*, pWaitSemaphoreValues)
-  DECORATE_VK_STRUCT_MEMBER(VkD3D12FenceSubmitInfoKHR, uint32_t, signalSemaphoreValuesCount)
-  DECORATE_VK_STRUCT_MEMBER(VkD3D12FenceSubmitInfoKHR, const uint64_t*, pSignalSemaphoreValues)
-END_DECORATE_VK_STRUCT(VkD3D12FenceSubmitInfoKHR);
-
-DECORATE_VK_TYPE(VkSemaphoreGetWin32HandleInfoKHR, VK_STRUCTURE_TYPE_SEMAPHORE_GET_WIN32_HANDLE_INFO_KHR);
-BEGIN_DECORATE_VK_STRUCT(VkSemaphoreGetWin32HandleInfoKHR)
-  DECORATE_VK_STRUCT_MEMBER(VkSemaphoreGetWin32HandleInfoKHR, VkStructureType, sType)
-  DECORATE_VK_STRUCT_MEMBER(VkSemaphoreGetWin32HandleInfoKHR, const void*, pNext)
-  DECORATE_VK_STRUCT_MEMBER(VkSemaphoreGetWin32HandleInfoKHR, VkSemaphore, semaphore)
-  DECORATE_VK_STRUCT_MEMBER(VkSemaphoreGetWin32HandleInfoKHR, VkExternalSemaphoreHandleTypeFlagBits, handleType)
-END_DECORATE_VK_STRUCT(VkSemaphoreGetWin32HandleInfoKHR);
-
-DECORATE_VK_TYPE(VkImportFenceWin32HandleInfoKHR, VK_STRUCTURE_TYPE_IMPORT_FENCE_WIN32_HANDLE_INFO_KHR);
-BEGIN_DECORATE_VK_STRUCT(VkImportFenceWin32HandleInfoKHR)
-  DECORATE_VK_STRUCT_MEMBER(VkImportFenceWin32HandleInfoKHR, VkStructureType, sType)
-  DECORATE_VK_STRUCT_MEMBER(VkImportFenceWin32HandleInfoKHR, const void*, pNext)
-  DECORATE_VK_STRUCT_MEMBER(VkImportFenceWin32HandleInfoKHR, VkFence, fence)
-  DECORATE_VK_STRUCT_MEMBER(VkImportFenceWin32HandleInfoKHR, VkFenceImportFlags, flags)
-  DECORATE_VK_STRUCT_MEMBER(VkImportFenceWin32HandleInfoKHR, VkExternalFenceHandleTypeFlagBits, handleType)
-  DECORATE_VK_STRUCT_MEMBER(VkImportFenceWin32HandleInfoKHR, HANDLE, handle)
-  DECORATE_VK_STRUCT_MEMBER(VkImportFenceWin32HandleInfoKHR, LPCWSTR, name)
-END_DECORATE_VK_STRUCT(VkImportFenceWin32HandleInfoKHR);
-
-DECORATE_VK_TYPE(VkExportFenceWin32HandleInfoKHR, VK_STRUCTURE_TYPE_EXPORT_FENCE_WIN32_HANDLE_INFO_KHR);
-BEGIN_DECORATE_VK_STRUCT(VkExportFenceWin32HandleInfoKHR)
-  DECORATE_VK_STRUCT_MEMBER(VkExportFenceWin32HandleInfoKHR, VkStructureType, sType)
-  DECORATE_VK_STRUCT_MEMBER(VkExportFenceWin32HandleInfoKHR, const void*, pNext)
-  DECORATE_VK_STRUCT_MEMBER(VkExportFenceWin32HandleInfoKHR, const SECURITY_ATTRIBUTES*, pAttributes)
-  DECORATE_VK_STRUCT_MEMBER(VkExportFenceWin32HandleInfoKHR, DWORD, dwAccess)
-  DECORATE_VK_STRUCT_MEMBER(VkExportFenceWin32HandleInfoKHR, LPCWSTR, name)
-END_DECORATE_VK_STRUCT(VkExportFenceWin32HandleInfoKHR);
-
-DECORATE_VK_TYPE(VkFenceGetWin32HandleInfoKHR, VK_STRUCTURE_TYPE_FENCE_GET_WIN32_HANDLE_INFO_KHR);
-BEGIN_DECORATE_VK_STRUCT(VkFenceGetWin32HandleInfoKHR)
-  DECORATE_VK_STRUCT_MEMBER(VkFenceGetWin32HandleInfoKHR, VkStructureType, sType)
-  DECORATE_VK_STRUCT_MEMBER(VkFenceGetWin32HandleInfoKHR, const void*, pNext)
-  DECORATE_VK_STRUCT_MEMBER(VkFenceGetWin32HandleInfoKHR, VkFence, fence)
-  DECORATE_VK_STRUCT_MEMBER(VkFenceGetWin32HandleInfoKHR, VkExternalFenceHandleTypeFlagBits, handleType)
-END_DECORATE_VK_STRUCT(VkFenceGetWin32HandleInfoKHR);
-
-DECORATE_VK_TYPE(VkImportMemoryWin32HandleInfoNV, VK_STRUCTURE_TYPE_IMPORT_MEMORY_WIN32_HANDLE_INFO_NV);
-BEGIN_DECORATE_VK_STRUCT(VkImportMemoryWin32HandleInfoNV)
-  DECORATE_VK_STRUCT_MEMBER(VkImportMemoryWin32HandleInfoNV, VkStructureType, sType)
-  DECORATE_VK_STRUCT_MEMBER(VkImportMemoryWin32HandleInfoNV, const void*, pNext)
-  DECORATE_VK_STRUCT_MEMBER(VkImportMemoryWin32HandleInfoNV, VkExternalMemoryHandleTypeFlagsNV, handleType)
-  DECORATE_VK_STRUCT_MEMBER(VkImportMemoryWin32HandleInfoNV, HANDLE, handle)
-END_DECORATE_VK_STRUCT(VkImportMemoryWin32HandleInfoNV);
-
-DECORATE_VK_TYPE(VkExportMemoryWin32HandleInfoNV, VK_STRUCTURE_TYPE_EXPORT_MEMORY_WIN32_HANDLE_INFO_NV);
-BEGIN_DECORATE_VK_STRUCT(VkExportMemoryWin32HandleInfoNV)
-  DECORATE_VK_STRUCT_MEMBER(VkExportMemoryWin32HandleInfoNV, VkStructureType, sType)
-  DECORATE_VK_STRUCT_MEMBER(VkExportMemoryWin32HandleInfoNV, const void*, pNext)
-  DECORATE_VK_STRUCT_MEMBER(VkExportMemoryWin32HandleInfoNV, const SECURITY_ATTRIBUTES*, pAttributes)
-  DECORATE_VK_STRUCT_MEMBER(VkExportMemoryWin32HandleInfoNV, DWORD, dwAccess)
-END_DECORATE_VK_STRUCT(VkExportMemoryWin32HandleInfoNV);
-
-DECORATE_VK_TYPE(VkWin32KeyedMutexAcquireReleaseInfoNV, VK_STRUCTURE_TYPE_WIN32_KEYED_MUTEX_ACQUIRE_RELEASE_INFO_NV);
-BEGIN_DECORATE_VK_STRUCT(VkWin32KeyedMutexAcquireReleaseInfoNV)
-  DECORATE_VK_STRUCT_MEMBER(VkWin32KeyedMutexAcquireReleaseInfoNV, VkStructureType, sType)
-  DECORATE_VK_STRUCT_MEMBER(VkWin32KeyedMutexAcquireReleaseInfoNV, const void*, pNext)
-  DECORATE_VK_STRUCT_MEMBER(VkWin32KeyedMutexAcquireReleaseInfoNV, uint32_t, acquireCount)
-  DECORATE_VK_STRUCT_MEMBER(VkWin32KeyedMutexAcquireReleaseInfoNV, const VkDeviceMemory*, pAcquireSyncs)
-  DECORATE_VK_STRUCT_MEMBER(VkWin32KeyedMutexAcquireReleaseInfoNV, const uint64_t*, pAcquireKeys)
-  DECORATE_VK_STRUCT_MEMBER(VkWin32KeyedMutexAcquireReleaseInfoNV, const uint32_t*, pAcquireTimeoutMilliseconds)
-  DECORATE_VK_STRUCT_MEMBER(VkWin32KeyedMutexAcquireReleaseInfoNV, uint32_t, releaseCount)
-  DECORATE_VK_STRUCT_MEMBER(VkWin32KeyedMutexAcquireReleaseInfoNV, const VkDeviceMemory*, pReleaseSyncs)
-  DECORATE_VK_STRUCT_MEMBER(VkWin32KeyedMutexAcquireReleaseInfoNV, const uint64_t*, pReleaseKeys)
-END_DECORATE_VK_STRUCT(VkWin32KeyedMutexAcquireReleaseInfoNV);
-
-BEGIN_DECORATE_VK_ENUM(VkFullScreenExclusiveEXT)
-  DECORATE_VK_ENUM_VALUE(VkFullScreenExclusiveEXT, VK_FULL_SCREEN_EXCLUSIVE_DEFAULT_EXT, 0)
-  DECORATE_VK_ENUM_VALUE(VkFullScreenExclusiveEXT, VK_FULL_SCREEN_EXCLUSIVE_ALLOWED_EXT, 1)
-  DECORATE_VK_ENUM_VALUE(VkFullScreenExclusiveEXT, VK_FULL_SCREEN_EXCLUSIVE_DISALLOWED_EXT, 2)
-  DECORATE_VK_ENUM_VALUE(VkFullScreenExclusiveEXT, VK_FULL_SCREEN_EXCLUSIVE_APPLICATION_CONTROLLED_EXT, 3)
-  DECORATE_VK_ENUM_VALUE(VkFullScreenExclusiveEXT, VK_FULL_SCREEN_EXCLUSIVE_MAX_ENUM_EXT, 0x7FFFFFFF)
-END_DECORATE_VK_ENUM(VkFullScreenExclusiveEXT);
-
-DECORATE_VK_TYPE(VkSurfaceFullScreenExclusiveInfoEXT, VK_STRUCTURE_TYPE_SURFACE_FULL_SCREEN_EXCLUSIVE_INFO_EXT);
-BEGIN_DECORATE_VK_STRUCT(VkSurfaceFullScreenExclusiveInfoEXT)
-  DECORATE_VK_STRUCT_MEMBER(VkSurfaceFullScreenExclusiveInfoEXT, VkStructureType, sType)
-  DECORATE_VK_STRUCT_MEMBER(VkSurfaceFullScreenExclusiveInfoEXT, void*, pNext)
-  DECORATE_VK_STRUCT_MEMBER(VkSurfaceFullScreenExclusiveInfoEXT, VkFullScreenExclusiveEXT, fullScreenExclusive)
-END_DECORATE_VK_STRUCT(VkSurfaceFullScreenExclusiveInfoEXT);
-
-DECORATE_VK_TYPE(VkSurfaceCapabilitiesFullScreenExclusiveEXT, VK_STRUCTURE_TYPE_SURFACE_CAPABILITIES_FULL_SCREEN_EXCLUSIVE_EXT);
-BEGIN_DECORATE_VK_STRUCT(VkSurfaceCapabilitiesFullScreenExclusiveEXT)
-  DECORATE_VK_STRUCT_MEMBER(VkSurfaceCapabilitiesFullScreenExclusiveEXT, VkStructureType, sType)
-  DECORATE_VK_STRUCT_MEMBER(VkSurfaceCapabilitiesFullScreenExclusiveEXT, void*, pNext)
-  DECORATE_VK_STRUCT_MEMBER(VkSurfaceCapabilitiesFullScreenExclusiveEXT, VkBool32, fullScreenExclusiveSupported)
-END_DECORATE_VK_STRUCT(VkSurfaceCapabilitiesFullScreenExclusiveEXT);
-
-DECORATE_VK_TYPE(VkSurfaceFullScreenExclusiveWin32InfoEXT, VK_STRUCTURE_TYPE_SURFACE_FULL_SCREEN_EXCLUSIVE_WIN32_INFO_EXT);
-BEGIN_DECORATE_VK_STRUCT(VkSurfaceFullScreenExclusiveWin32InfoEXT)
-  DECORATE_VK_STRUCT_MEMBER(VkSurfaceFullScreenExclusiveWin32InfoEXT, VkStructureType, sType)
-  DECORATE_VK_STRUCT_MEMBER(VkSurfaceFullScreenExclusiveWin32InfoEXT, const void*, pNext)
-  DECORATE_VK_STRUCT_MEMBER(VkSurfaceFullScreenExclusiveWin32InfoEXT, HMONITOR, hmonitor)
-END_DECORATE_VK_STRUCT(VkSurfaceFullScreenExclusiveWin32InfoEXT);
-
-#endif //vulkan_win32.h
+#endif //vulkan_directfb.h
 
 #if defined(VULKAN_FUCHSIA_H_)
 
